@@ -4,7 +4,7 @@ const logger = require('../winston')(module);
 
 router.get('/:tx', (req, res, next) => {
   // do something with req.body
-  res.send({params: req.params});
+  res.send({result: 'Mt22cb23cbc45aedf921af1a715f764ffc035716ab3dcbda01ce5f7c5aba187c99'});
 /*
   res.setTimeout(1000*5, function() {
     res.send({params: req.params});
@@ -17,7 +17,8 @@ router.get('/:tx', (req, res, next) => {
 });
 
 router.get('', (req, res, next) => {
-  res.send({query: req.query});
+  //res.send({query: req.query});
+  res.send({result: 'Mt22cb23cbc45aedf921af1a715f764ffc035716ab3dcbda01ce5f7c5aba187c99'});
 /*
   res.setTimeout(10000*5, function() {
     res.send({query: req.query});
