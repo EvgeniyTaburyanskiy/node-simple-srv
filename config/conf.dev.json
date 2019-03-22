@@ -1,0 +1,6 @@
+{
+	"port": 8841,
+	"logger": {
+		"transport": "Console"
+	}
+}

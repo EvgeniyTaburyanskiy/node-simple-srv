@@ -1,0 +1,29 @@
+{
+  "name": "node-simple-srv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "start": "node ${SERVICE:-.}",
+    "dev": "nodemon .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cluster": "^0.7.7",
+    "restify": "^8.2.0",
+    "restify-cors-middleware": "^1.1.1",
+    "restify-router": "^0.5.1",
+    "restify-router-config": "^1.2.0-alpha.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "esm": "^3.2.20",
+    "nodemon": "^1.18.10"
+  }
+}
