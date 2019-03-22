@@ -21,13 +21,26 @@ function clearScreen() {
   process.stdout.write('\x1Bc'); /* <ESC>c - reset terminal (no history) */
 }
 
+const lastTimes = {};
+function timeFromLast(name) {
+  let curt = hrtime();
+  let res = 0;
+  if (lastTimes[name])
+    res = curt - lastTimes[name];
+  lastTimes[name] = curt;
+  return res;
+}
+
 if (cluster.isMaster) {
   const cpuCount = os.cpus().length;
   const arWorkers = [];
+  const oStats = {
+    numReqTotal : 0,
+    numReqPerSec: 0,
+    avgReq      : 0
+  };
 
-  let numReqPerSec = 0,
-      numReqTotal = 0,
-      startTime     = hrtime();
+  let startTime = hrtime();
 
   logger.profile('Server is active. Forking workers now.');
   logger.profile(`${logger}.master.start workers=${cpuCount}`);
@@ -47,8 +60,8 @@ if (cluster.isMaster) {
     worker.on('message', function(msg) {
       switch (msg.cmd) {
         case 'notifyRequest':
-          numReqPerSec++;
-          numReqTotal++;
+          oStats.numReqPerSec++;
+          oStats.numReqTotal++;
           break;
       }
     });
@@ -59,14 +72,17 @@ if (cluster.isMaster) {
   logger.profile(`${env}.master.start workers=${cpuCount}`);
 
   let iConTimer = setInterval(() => {
+    //let iTickGone=timeFromLast('tick');
     clearScreen();
     let elapsed = new Date(hrtime() - startTime + 100).toUTCString().slice(17, 25);
     console.log('Elapsed: ' + elapsed + '; ' + new Date());
-    console.log(`Total requests handled ${numReqTotal}`);
+    console.log(`Total handled ${oStats.numReqTotal} avg: ${oStats.avgReq}`);
     console.log();
-    console.log(`Got requests : ${numReqPerSec}/sec`);
+    console.log(`Got requests : ${oStats.numReqPerSec}/sec`);
     console.log();
-    numReqPerSec = 0;
+
+    oStats.numReqPerSec = 0;
+
   }, 1000);
 
 }
