@@ -72,10 +72,10 @@ if (cluster.isMaster) {
   logger.profile(`${env}.master.start workers=${cpuCount}`);
 
   let iConTimer = setInterval(() => {
-    //let iTickGone=timeFromLast('tick');
+    let iTickGone=timeFromLast('tick');
     clearScreen();
     let elapsed = new Date(hrtime() - startTime + 100).toUTCString().slice(17, 25);
-    oStats.avgReq = Number(oStats.numReqTotal/elapsed).toFixed(4);
+    oStats.avgReq = Number(oStats.numReqTotal/(elapsed.getTime() / 1000)).toFixed(4);
     console.log('Elapsed: ' + elapsed + '; ' + new Date());
     console.log(`Total handled ${oStats.numReqTotal} avg: ${oStats.avgReq}`);
     console.log();
