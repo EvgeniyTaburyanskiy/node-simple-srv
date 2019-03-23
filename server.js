@@ -74,8 +74,9 @@ if (cluster.isMaster) {
   let iConTimer = setInterval(() => {
     let iTickGone=timeFromLast('tick');
     clearScreen();
-    let elapsed = new Date(hrtime() - startTime + 100).toUTCString().slice(17, 25);
-    oStats.avgReq = Number(oStats.numReqTotal/(elapsed.getTime() / 1000)).toFixed(4);
+    let oElapsetDate=  new Date(hrtime() - startTime + 100);
+    let elapsed = oElapsetDate.toUTCString().slice(17, 25);
+    oStats.avgReq = Number(oStats.numReqTotal/(oElapsetDate.getTime() / 1000)).toFixed(4);
     console.log('Elapsed: ' + elapsed + '; ' + new Date());
     console.log(`Total handled ${oStats.numReqTotal} avg: ${oStats.avgReq}`);
     console.log();
