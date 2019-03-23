@@ -78,7 +78,7 @@ if (cluster.isMaster) {
     console.log('Elapsed: ' + elapsed + '; ' + new Date());
     console.log(`Total handled ${oStats.numReqTotal} avg: ${oStats.avgReq}`);
     console.log();
-    console.log(`Got requests : ${oStats.numReqPerSec}/sec`);
+    console.log(`Now: ${oStats.numReqPerSec} req/sec`);
     console.log();
 
     oStats.numReqPerSec = 0;

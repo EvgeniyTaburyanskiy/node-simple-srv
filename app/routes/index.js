@@ -4,6 +4,7 @@ const logger = require('../winston')(module);
 
 router.add('', require('./home'));
 router.add('/status', require('./status'));
+router.add('/address', require('./address'));
 router.add('/send_transaction', require('./send_transaction'));
 
 router.get('/break', (req, res, next) => {
