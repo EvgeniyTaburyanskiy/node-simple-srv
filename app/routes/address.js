@@ -8,7 +8,7 @@ const oTxResult = {
     "id": "",
     "result": {
       "balance": {
-        "MNT": "30000000000004200"
+        "MNT": "300000000000042000000"
       },
       "transaction_count": "66"
     }
